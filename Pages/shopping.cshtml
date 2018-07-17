@@ -1,0 +1,49 @@
+@page "/shopping"
+@inject HttpClient Http
+
+<h2>Alınacak Ürün Sayısı @_shoopingList.Where(urn=>!urn.IsBought).Count()</h2>
+<ul>
+    @foreach(var item in _shoopingList)
+    {
+        <li>
+            <input type="checkbox" bind="@item.IsBought"/>
+            <input bind="@item.Name"/>
+            <input bind="@item.Quantity"/>
+            <input bind="@item.Price"/>
+        </li>
+    }
+    <input placeholder="Ürünün Adı" bind="@_name"/>
+    <input placeholder="Miktarı" bind="@_quantity"/>
+    <input placeholder="Fiyat" bind="@_price"/>
+    <button onclick="@AddItem">Listeye Ekle</button>
+</ul>
+
+@functions
+{
+    List<ShoppingList> _shoopingList=new List<ShoppingList>();
+
+    string _name;
+    string _quantity;
+    string _price;
+
+    protected override async Task OnInitAsync()
+    {
+        _shoopingList= await Http.GetJsonAsync<List<ShoppingList>>("/sample-data/shopping.json");        
+    }
+
+    public void AddItem()
+    {
+        _shoopingList.Add(new ShoppingList(){ Name=_name, Quantity=_quantity, Price=_price});
+        _name="";
+        _price="";
+        _quantity="";
+    }
+
+    class ShoppingList
+    {
+        public string Name { get; set;}
+        public string Quantity { get; set; }
+        public string Price { get; set;}
+        public bool IsBought { get; set; }
+    }
+}

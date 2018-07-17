@@ -1,0 +1,22 @@
+[
+    {
+        "Name": "Domates",
+        "Price": "3.5₺",
+        "Quantity": "2 Adet"   
+    },
+    {
+         "Name": "Kıyma",
+        "Price": "45₺",
+        "Quantity": "1kg"   
+    },
+    {
+        "Name": "Soğan",
+        "Price": "3₺",
+        "Quantity": "3 Adet"   
+    },
+    {
+        "Name": "Patates",
+        "Price": "2₺",
+        "Quantity": "2kg"   
+    }
+]
